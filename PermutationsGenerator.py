@@ -7,11 +7,13 @@ class PermutationGenerator:
     tot_num_permutations = 0
     remaining_permutations = 0
 
+
     def __init__(self, list_of_elements):
         self.list_of_elements = copy.deepcopy(list_of_elements)
         self.permutation_indices = [None] * len(self.list_of_elements)
         self.tot_num_permutations = self.calculate_factorial(len(self.list_of_elements))
         self.reset_permutation_generator()
+
 
     def __iter__(self):
         return self
@@ -78,10 +80,34 @@ class PermutationGenerator:
         self.remaining_permutations -= 1
 
 
+    """https://en.wikipedia.org/wiki/Heap%27s_algorithm"""
+    def generate_permutation_heap(self, k_heap, list_of_elements):
+
+        if k_heap == 1:
+            print(list_of_elements)
+        else:
+            self.generate_permutation_heap(k_heap - 1, list_of_elements)
+
+            for i in range(k_heap-1):
+                if k_heap % 2 == 0:
+                    list_of_elements[i], list_of_elements[k_heap-1] = list_of_elements[k_heap-1], list_of_elements[i]
+                else:
+                    list_of_elements[0], list_of_elements[k_heap-1] = list_of_elements[k_heap-1], list_of_elements[0]
+
+                self.generate_permutation_heap(k_heap - 1, list_of_elements)
 
 
 
-permutations = iter(PermutationGenerator(["1", "2", "3"]))
 
-for permutation in iter(PermutationGenerator(["1", "2", "3"])):
+
+
+list_of_elements = ["1", "2", "3"]
+
+permutations = PermutationGenerator(list_of_elements)
+
+print("Heap algorithm: ")
+permutations.generate_permutation_heap(len(list_of_elements), list_of_elements)
+
+print("Lexicographic next permutation algorithm: ")
+for permutation in iter(permutations):
     print(permutation)

@@ -13,3 +13,4 @@ This repo contains code representing various Maths formulae, puzzles, sequences,
 
 4. Permutations generator - 
     Next Lexicographic permutation algorithm - https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
+    Heap's algorithm - https://en.wikipedia.org/wiki/Heap%27s_algorithm
